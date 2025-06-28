@@ -8,14 +8,15 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
+
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigator = useNavigate();
+
 
   const email = useRef(null);
   const Password = useRef(null);
@@ -32,23 +33,23 @@ const Login = () => {
       createUserWithEmailAndPassword(auth, email.current.value, Password.current.value)
         .then((userCredential) => {
           const user = userCredential.user;
-          updateProfile(user, {
-            displayName: Name.current.value,
-            photoURL:
-              "https://thumbs.dreamstime.com/b/spring-nature-scene-beautiful-landscape-tranquil-background-sunlight-scenic-beauty-meadow-backdrop-sunshine-green-grass-149811995.jpg",
-          })
-            .then(() => {
-              const { uid, email, displayName, photoURL } = auth.currentUser;
-              dispatch(
-                addUser({
-                  uid: uid,
-                  email: email,
-                  displayName: displayName,
-                  photoURL: photoURL,
-                })
-              );
-              navigator("/browse");
-            })
+        updateProfile(user, {
+  displayName: Name.current.value,
+  photoURL: USER_AVATAR,
+})
+  .then(() => {
+    // Fetch the updated user from auth
+    const updatedUser = auth.currentUser;
+    dispatch(
+      addUser({
+        uid: updatedUser.uid,
+        email: updatedUser.email,
+        displayName: updatedUser.displayName,
+        photoURL: updatedUser.photoURL, // ✅ will now reflect updated value
+      })
+    );
+  })
+
             .catch((error) => {
               setErrorMessage(error.message);
             });
@@ -60,7 +61,7 @@ const Login = () => {
       // Sign in logic
       signInWithEmailAndPassword(auth, email.current.value, Password.current.value)
         .then((userCredential) => {
-          navigator("/browse");
+        
         })
         .catch((error) => {
           setErrorMessage(error.code + "-" + error.message);
