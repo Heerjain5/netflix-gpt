@@ -21,7 +21,7 @@ const useTrendingMovie = () => {
   };
 
   useEffect(() => {
-     getTrendingMovie();
+   !TrendingMovie&&  getTrendingMovie();
   }, []);
 };
 

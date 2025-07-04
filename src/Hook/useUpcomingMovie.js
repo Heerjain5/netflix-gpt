@@ -21,7 +21,7 @@ const useUpcomingMovie = () => {
   };
 
   useEffect(() => {
-     getUpcomingMovie();
+   !UpcomingMovie&&  getUpcomingMovie();
   }, []);
 };
 

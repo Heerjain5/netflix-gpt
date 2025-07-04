@@ -8,9 +8,18 @@ export const USER_AVATAR =
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlMzQ4NGNhMmJlYjgzYjUyNDExMmU0MGVhODAwNTE1NSIsIm5iZiI6MTc0OTQ3MDEzMC45NTM5OTk4LCJzdWIiOiI2ODQ2Y2JiMjhiM2IzNzhkOWVmZDVmZWYiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.44TVS0i9vyp6TekRqf2v_MOLkn1AxjB2M70xNLJnFLA'
+    Authorization: 'Bearer'+ process.env.REACT_APP_TMBD_KEY,
   }
 };
 
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
 
+
+export const BG_URL ="https://dqae.org/wp-content/uploads/2022/09/234234-1140x641.jpg"
+
+export const Supported_Languages = [{identifier:"en", name:"English"},
+  {identifier:"hindi", name:"Hindi"},
+  {identifier:"spanish", name:"Spanish"},
+  {identifier:"chinese", name:"Chinese"}];
+
+export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;

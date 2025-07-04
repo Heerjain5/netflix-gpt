@@ -5,13 +5,15 @@ import { auth } from "../utils/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { addUser, removeUser } from "../utils/userSlice";
-import { lOGO } from "../utils/constants";
-
+import { lOGO, Supported_Languages } from "../utils/constants";
+import { toggleGptSearchView } from "../utils/GPTSlice";
+import lang from "../utils/languageConstant";
+import {changeLanguage} from "../utils/ConfigSlice";
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
-
+  const showGptSearch  = useSelector((store)=>store.gpt.showGptSearch);
   const handleSignOut = () => {
     signOut(auth)
       .then(() => navigate("/"))
@@ -33,13 +35,42 @@ const Header = () => {
     return () => unsubscribe();
   }, []);
 
+
+  const handleGptSearchClick = () =>{
+    // toogle GPT Search 
+    dispatch(toggleGptSearchView());
+     
+  }
+const handlelanguagechange = (e) =>{
+ 
+  dispatch(changeLanguage(e.target.value));
+
+}
+  
+
   return (
-    <div className="absolute top-0 left-0 w-full flex justify-between items-center px-8 py-4 bg-gradient-to-b from-black to-transparent z-20">
-      <img className="h-10" src={lOGO} alt="logo" />
+    <div className="absolute w-screen px-2 py-1 bg-gradient-to-b from-black z-10 flex  justify-between ">
+      <img className="w-40  " src={lOGO} alt="logo" />
       {user && (
-        <div className="flex items-center space-x-4 pr-2">
-          <img className="h-10 w-10 rounded" alt="Usericon" src={user?.photoURL} />
-          <button onClick={handleSignOut} className="text-white hover:underline">
+        <div className="flex p-2 ">
+         {showGptSearch &&(
+           <select className="p-2 m-2 bg-gray-900 text-white " onClick={handlelanguagechange}>
+            {Supported_Languages.map((lang)=><option key={lang.identifier} value={lang.identifier}>
+              {lang.name}
+            </option>
+          )}
+          </select>
+         )
+          
+         }
+          <button className="px-1 py-1 -mt-2 mx-3   bg-purple-900 text-white rounded-lg"
+          onClick={handleGptSearchClick}
+          >{
+            showGptSearch?"HomePage":"GPT Search"
+          }
+          </button>
+          <img className="h-12 w-12 rounded" alt="Usericon" src={user?.photoURL} />
+          <button onClick={handleSignOut} className="text-white">
             (Sign Out)
           </button>
         </div>

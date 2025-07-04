@@ -11,7 +11,7 @@ import { auth } from "../utils/firebase";
 
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { USER_AVATAR } from "../utils/constants";
+import { BG_URL, USER_AVATAR } from "../utils/constants";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -83,7 +83,7 @@ const Login = () => {
       {/* Background Image */}
       <div className="absolute top-0 left-0 w-full h-full -z-10">
         <img
-          src="https://dqae.org/wp-content/uploads/2022/09/234234-1140x641.jpg"
+          src={BG_URL}
           alt="Netflix Background"
           className="w-full h-full object-cover"
         />
