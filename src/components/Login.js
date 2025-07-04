@@ -85,14 +85,14 @@ const Login = () => {
         <img
           src={BG_URL}
           alt="Netflix Background"
-          className="w-full h-full object-cover"
+          className="w-full h-screen object-cover"
         />
       </div>
 
       {/* Login / Signup Form */}
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-3/12 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-12 bg-black bg-opacity-70 text-white rounded-lg shadow-lg z-10"
+        className=" w-fullmd:w-3/12 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-12 bg-black bg-opacity-70 text-white rounded-lg shadow-lg z-10"
       >
         <h1 className="font-bold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}

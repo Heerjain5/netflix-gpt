@@ -49,10 +49,10 @@ const handlelanguagechange = (e) =>{
   
 
   return (
-    <div className="absolute w-screen px-2 py-1 bg-gradient-to-b from-black z-10 flex  justify-between ">
-      <img className="w-40  " src={lOGO} alt="logo" />
+    <div className="absolute w-screen px-2 py-1 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between ">
+      <img className="w-40  mx-auto md:mx-0" src={lOGO} alt="logo" />
       {user && (
-        <div className="flex p-2 ">
+        <div className="flex p-2 justify-between">
          {showGptSearch &&(
            <select className="p-2 m-2 bg-gray-900 text-white " onClick={handlelanguagechange}>
             {Supported_Languages.map((lang)=><option key={lang.identifier} value={lang.identifier}>
@@ -69,7 +69,7 @@ const handlelanguagechange = (e) =>{
             showGptSearch?"HomePage":"GPT Search"
           }
           </button>
-          <img className="h-12 w-12 rounded" alt="Usericon" src={user?.photoURL} />
+          <img className=" hidden md: block h-12 w-12 rounded" alt="Usericon" src={user?.photoURL} />
           <button onClick={handleSignOut} className="text-white">
             (Sign Out)
           </button>
